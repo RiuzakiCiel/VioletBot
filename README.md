@@ -1,0 +1,2 @@
+# VioletBot
+Discord bot
