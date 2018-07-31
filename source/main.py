@@ -1,6 +1,8 @@
 import discord
 import asyncio
 import os
+import random
+
 
 client = discord.Client()
 
@@ -47,7 +49,15 @@ async def on_message(message): #Rule system
     if message.content.startswith(';;taco'):
         await client.send_message(message.channel, "Do you like taco's?")
         print("Someone used the ;;taco command")
-
+    if message.content.startswith(';;naru'):
+        RNG = random.randint(0, 3)
+        if RNG == 1:
+            await client.send_message(message.channel, "Cus itsa  SMALL DICK BOY")
+        if RNG == 2:
+            await client.send_message(message.channel, "The creepy thing?")
+        if RNG == 3:
+            await client.send_message(message.channel, "'I need yvar to wake tf up for this'\nNo you don't. Leave me the fuck alone")
+        print("Somone used the ;;naru command")
 
 token_txt = open(r"bot_token.txt", "r")
 token = token_txt.read()
