@@ -2,7 +2,7 @@ import discord
 import asyncio
 import os
 import random
-
+import sys
 
 client = discord.Client()
 
@@ -58,6 +58,7 @@ async def on_message(message): #Rule system
         if RNG == 3:
             await client.send_message(message.channel, "'I need yvar to wake tf up for this'\nNo you don't. Leave me the fuck alone")
         print("Somone used the ;;naru command")
+    await bot.process_commands(message)
 
 token_txt = open(r"bot_token.txt", "r")
 token = token_txt.read()
