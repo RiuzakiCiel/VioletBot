@@ -20,9 +20,9 @@ async def on_ready():
 
 @client.event
 async def on_message(message):
-    if message.content.startswith(';;test'):
-        await client.send_message(message.channel, 'test')
-        print("Someone used the ';;test' command")
+    if message.content.startswith(';;ban'):
+        await client.send_message(message.channel, 'Proccessing ban...')
+        print("Someone used the ;;ban command")
 
 token_txt = open(r"bot_token.txt", "r")
 token = token_txt.read()
