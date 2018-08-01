@@ -21,7 +21,13 @@ async def on_ready(): #Executes the code below once the bot connects
     print('------')
 
 @client.event
-async def on_message(message): #Rule system
+async def on_member_join(member):
+    server = member.server
+    fmt = 'Hey {0.mention}, welcome to the {1.name}!\nPlease read the rules and have fun!'
+    await client.send_message(discord.Object(id='458347412910768128'), fmt.format(member, server))
+
+@client.event
+async def on_message(message): #All the messages the bot sends
     if message.content.startswith(';;r1'):
         await client.send_message(message.channel, 'Do not impersonate people. You can swear in this server but do not use any racial/sexist/etc. (you know the drill) words.')
         print("Someone used the ;;r1 command")
