@@ -25,6 +25,7 @@ async def on_member_join(member):
     server = member.server
     fmt = 'Hey {0.mention}, welcome to the {1.name}!\nPlease read the rules and have fun!'
     await client.send_message(discord.Object(id='458347412910768128'), fmt.format(member, server))
+    print(member, "joined the the", server)
 
 @client.event
 async def on_message(message): #All the messages the bot sends
