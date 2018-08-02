@@ -3,10 +3,11 @@ import asyncio
 import os
 import random
 import sys
+from discord.ext import commands
 
 client = discord.Client()
 
-if not os.path.isfile("bot_token.txt"):
+if not os.path.isfile("bot_token.txt"): #Authentication stuff
     print("Please insert your bot token")
     token = input()
     token_txt = open(r"bot_token.txt", "a+")
@@ -21,7 +22,7 @@ async def on_ready(): #Executes the code below once the bot connects
     print('------')
 
 @client.event
-async def on_member_join(member):
+async def on_member_join(member): #Welcome message
     server = member.server
     fmt = 'Hey {0.mention}, welcome to the {1.name}!\nPlease read the rules and have fun!'
     await client.send_message(discord.Object(id='458347412910768128'), fmt.format(member, server))
@@ -36,7 +37,7 @@ async def on_message(message): #All the messages the bot sends
         await client.send_message(message.channel, "Keep the channels on topic. this applies to voice channels too!")
         print(message.author, "used the ;;r2 command in the", message.channel, "channel")
     if message.content.startswith(';;r3'):
-        await client.send_message(message.channel, "Read the description of the chat you're in to make sure you are not breaking any rules there, we are not super strict and let a lot just sliping by, but you don't want to have the chance to be kicked. This applies to voice channels too!")
+        await client.send_message(message.channel, "Read the description of the chat you're in to make sure you are not breaking any rules there, we are not super strict and let a lot just slip by, but you don't want to have the chance to be kicked. This applies to voice channels too!")
         print(message.author, "used the ;;r3 command in the", message.channel, "channel")
     if message.content.startswith(';;r4'):
         await client.send_message(message.channel, "We do not tolerate useless @'s or @'s to random people. Do not tag mods unless it's really necessary!")
@@ -48,7 +49,7 @@ async def on_message(message): #All the messages the bot sends
         await client.send_message(message.channel, "DO NOT SPAM!!!!! Spamming is one of the easiest ways to get a warning/ban.")
         print(message.author, "used the ;;r6 command in the", message.channel, "channel")
     if message.content.startswith(';;r7'):
-        await client.send_message(message.channel, "Don't drama. it's as simple as that.")
+        await client.send_message(message.channel, "Don't do drama. it's as simple as that.")
         print(message.author, "used the ;;r7 command in the", message.channel, "channel")
     if message.content.startswith(';;r8'):
         await client.send_message(message.channel, "This is an english speaking server, don't randomly start talking in Spanish!")
@@ -57,14 +58,23 @@ async def on_message(message): #All the messages the bot sends
         await client.send_message(message.channel, "Do you like taco's?")
         print(message.author, "used the ;;taco command in the", message.channel, "channel")
     if message.content.startswith(';;naru'):
-        RNG = random.randint(0, 3)
-        if RNG == 1:
+        RNG = random.randint(0, 2)
+        if RNG == 0:
             await client.send_message(message.channel, "Cus itsa  SMALL DICK BOY")
-        if RNG == 2:
+        if RNG == 1:
             await client.send_message(message.channel, "The creepy thing?")
-        if RNG == 3:
+        if RNG == 2:
             await client.send_message(message.channel, "'I need yvar to wake tf up for this'\nNo you don't. Leave me the fuck alone")
         print(message.author, "used the ;;naru command in the", message.channel, "channel")
+    if message.content.startswith(';;gny'):
+        RNG = random.randint(0, 2)
+        if RNG == 0:
+            await client.send_message(message.channel, "Ya shaveing smooth and my crack hard to do")
+        if RNG == 1:
+            await client.send_message(message.channel, "Ok hugs mmm u not still u know thinking ur bad right")
+        if RNG == 2:
+            await client.send_message(message.channel, "Clenches butt cheeks so poop doesn't come out")
+        print(message.author, "used the ;;gny command in the", message.channel, "channel")
 
 token_txt = open(r"bot_token.txt", "r")
 token = token_txt.read()
