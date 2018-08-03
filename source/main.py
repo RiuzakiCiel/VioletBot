@@ -100,6 +100,17 @@ async def ban(ctx, member: discord.Member):
         await bot.say("You don't have permissions to use this command!")
         print(ctx.message.author, "tried to ban", member, "without permissions!")
 
+@bot.command(pass_context=True)
+async def kick(ctx, member: discord.Member):
+    if ctx.message.author.server_permissions.administrator:
+        await bot.kick(member)
+        fmt = "{0.mention} is now kicked"
+        await bot.send_message(ctx.message.channel, fmt.format(member))
+        print(ctx.message.author, "kicked", member)
+    else:
+        await bot.say("You don't have permissions to use this command!")
+        print(ctx.message.author, "tried to kick", member, "without permissions!")
+
 token_txt = open(r"bot_token.txt", "r")
 token = token_txt.read()
 bot.run(token)
