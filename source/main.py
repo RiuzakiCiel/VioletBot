@@ -89,6 +89,17 @@ async def gny(ctx): #Gny command
         await bot.say("Clenches butt cheeks so poop doesn't come out")
     print(ctx.message.author, "used the naru command in the", ctx.message.channel, "channel")
 
+@bot.command(pass_context=True)
+async def ban(ctx, member: discord.Member):
+    if ctx.message.author.server_permissions.administrator:
+        await bot.ban(member)
+        fmt = "{0.mention} is now banned!"
+        await bot.send_message(ctx.message.channel, fmt.format(member))
+        print(ctx.message.author, "banned", member)
+    else:
+        await bot.say("You don't have permissions to use this command!")
+        print(ctx.message.author, "tried to ban", member, "without permissions!")
+
 token_txt = open(r"bot_token.txt", "r")
 token = token_txt.read()
 bot.run(token)
