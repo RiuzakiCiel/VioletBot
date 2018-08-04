@@ -2,6 +2,7 @@ import discord
 import asyncio
 import os
 import random
+import linecache
 from discord.ext import commands
 
 bot = commands.Bot(command_prefix=";;")
@@ -29,42 +30,42 @@ async def on_ready():
 
 @bot.command(pass_context=True) 
 async def r1(ctx): #R1 command
-    await bot.say("Do not impersonate people. You can swear in this server but do not use any racial/sexist/etc. (you know the drill) words.")
+    await bot.say(linecache.getline("rules.txt", 1))
     print(ctx.message.author, "used the r1 command in the", ctx.message.channel, "channel")
 
 @bot.command(pass_context=True)
 async def r2(ctx): #R2 command
-    await bot.say("Keep the channels on topic. this applies to voice channels too!")
+    await bot.say(linecache.getline("rules.txt", 2))
     print(ctx.message.author, "used the r2 command in the", ctx.message.channel, "channel")
 
 @bot.command(pass_context=True)
 async def r3(ctx): #R3 command
-    await bot.say("Read the description of the chat you're in to make sure you are not breaking any rules there, we are not super strict and let a lot just slip by, but you don't want to have the chance to be kicked. This applies to voice channels too!")
+    await bot.say(linecache.getline("rules.txt", 3))
     print(ctx.message.author, "used the r3 command in the", ctx.message.channel, "channel")
 
 @bot.command(pass_context=True)
 async def r4(ctx): #R4 command
-    await bot.say("We do not tolerate useless @'s or @'s to random people. Do not tag mods unless it's really necessary!")
+    await bot.say(linecache.getline("rules.txt", 4))
     print(ctx.message.author, "used the r4 command in the", ctx.message.channel, "channel")
 
 @bot.command(pass_context=True)
 async def r5(ctx): #R5 command
-    await bot.say("Do not tease people with their spelling of words, only if they really ask for help.")
+    await bot.say(linecache.getline("rules.txt", 5))
     print(ctx.message.author, "used the r5 command in the", ctx.message.channel, "channel")
 
 @bot.command(pass_context=True)
 async def r6(ctx): #R6 command
-    await bot.say("Do not spam. Spamming is one of the easiest ways to get a warning/ban.")
+    await bot.say(linecache.getline("rules.txt", 6))
     print(ctx.message.author, "used the r6 command in the", ctx.message.channel, "channel")
 
 @bot.command(pass_context=True)
 async def r7(ctx): #R7 command
-    await bot.say("Don't do drama. it's as simple as that.")
+    await bot.say(linecache.getline("rules.txt", 7))
     print(ctx.message.author, "used the r7 command in the", ctx.message.channel, "channel")
 
 @bot.command(pass_context=True)
 async def r8(ctx): #R8 command
-    await bot.say("This is an english speaking server, so keep communicating to that language.")
+    await bot.say(linecache.getline("rules.txt", 8))
     print(ctx.message.author, "used the r8 command in the", ctx.message.channel, "channel")
 
 @bot.command(pass_context=True)
