@@ -131,6 +131,7 @@ async def mantis(ctx): #Mantis command
         await bot.say(linecache.getline("../txt_files/mantis.txt", 18))
     if RNG == 19:
         await bot.say(linecache.getline("../txt_files/mantis.txt", 19))
+    print(ctx.message.author, "used the mantis command in the", ctx.message.channel, "channel")
 
 @bot.command(pass_context=True)
 async def ban(ctx, member: discord.Member):
