@@ -93,44 +93,7 @@ async def gny(ctx): #Gny command
 @bot.command(pass_context=True)
 async def mantis(ctx): #Mantis command
     RNG = random.randint(1, 19)
-    if RNG == 1:
-        await bot.say(linecache.getline("../txt_files/mantis.txt", 1))
-    if RNG == 2:
-        await bot.say(linecache.getline("../txt_files/mantis.txt", 2))
-    if RNG == 3:
-        await bot.say(linecache.getline("../txt_files/mantis.txt", 3))
-    if RNG == 4:
-        await bot.say(linecache.getline("../txt_files/mantis.txt", 4))
-    if RNG == 5:
-        await bot.say(linecache.getline("../txt_files/mantis.txt", 5))
-    if RNG == 6:
-        await bot.say(linecache.getline("../txt_files/mantis.txt", 6))
-    if RNG == 7:
-        await bot.say(linecache.getline("../txt_files/mantis.txt", 7))
-    if RNG == 8:
-        await bot.say(linecache.getline("../txt_files/mantis.txt", 8))
-    if RNG == 9:
-        await bot.say(linecache.getline("../txt_files/mantis.txt", 9))
-    if RNG == 10:
-        await bot.say(linecache.getline("../txt_files/mantis.txt", 10))
-    if RNG == 11:
-        await bot.say(linecache.getline("../txt_files/mantis.txt", 11))
-    if RNG == 12:
-        await bot.say(linecache.getline("../txt_files/mantis.txt", 12))
-    if RNG == 13:
-        await bot.say(linecache.getline("../txt_files/mantis.txt", 13))
-    if RNG == 14:
-        await bot.say(linecache.getline("../txt_files/mantis.txt", 14))
-    if RNG == 15:
-        await bot.say(linecache.getline("../txt_files/mantis.txt", 15))
-    if RNG == 16:
-        await bot.say(linecache.getline("../txt_files/mantis.txt", 16))
-    if RNG == 17:
-        await bot.say(linecache.getline("../txt_files/mantis.txt", 17))
-    if RNG == 18:
-        await bot.say(linecache.getline("../txt_files/mantis.txt", 18))
-    if RNG == 19:
-        await bot.say(linecache.getline("../txt_files/mantis.txt", 19))
+    await bot.say(linecache.getline("../txt_files/mantis.txt", RNG))
     print(ctx.message.author, "used the mantis command in the", ctx.message.channel, "channel")
 
 @bot.command(pass_context=True)
