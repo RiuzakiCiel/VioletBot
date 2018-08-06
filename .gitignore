@@ -107,5 +107,4 @@ venv.bak/
 # mypy
 .mypy_cache/
 source/.vscode/settings.json
-source/bot_token.txt
 txt_files/bot_token.txt

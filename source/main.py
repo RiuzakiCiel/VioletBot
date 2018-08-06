@@ -17,7 +17,7 @@ if not os.path.isfile("../txt_files/bot_token.txt"): #Authentication stuff
 @bot.event
 async def on_member_join(member): #Welcome message
     server = member.server
-    fmt = linecache.getline("../txt_files/general.txt", 1)
+    fmt = 'Hey {0.mention}, welcome to the {1.name}!\nPlease read the rules and have fun!'
     await bot.send_message(discord.Object(id='458347412910768128'), fmt.format(member, server))
     print(member, "joined the the", server)
 
@@ -72,44 +72,86 @@ async def r8(ctx): #R8 command
 async def naru(ctx): #Naru command
     RNG = random.randint(0, 2)
     if RNG == 0:
-        await bot.say(linecache.getline("../txt_files/general.txt", 2))
+        await bot.say("Cus itsa  SMALL DICK BOY")
     if RNG == 1:
-        await bot.say(linecache.getline("../txt_files/general.txt", 3))
+        await bot.say("The creepy thing?")
     if RNG == 2:
-        await bot.say(linecache.getline("../txt_files/general.txt", 4))
+        await bot.say("'I need yvar to wake tf up for this'\nNo you don't. Leave me the fuck alone")
     print(ctx.message.author, "used the naru command in the", ctx.message.channel, "channel")
 
 @bot.command(pass_context=True)
 async def gny(ctx): #Gny command
     RNG = random.randint(0, 2)
     if RNG == 0:
-        await bot.say(linecache.getline("../txt_files/general.txt", 5))
+        await bot.say("Ya shaveing smooth and my crack hard to do")
     if RNG == 1:
-        await bot.say(linecache.getline("../txt_files/general.txt", 6))
+        await bot.say("Ok hugs mmm u not still u know thinking ur bad right")
     if RNG == 2:
-        await bot.say(linecache.getline("../txt_files/general.txt", 7))
-    print(ctx.message.author, "used the gny command in the", ctx.message.channel, "channel")
+        await bot.say("Clenches butt cheeks so poop doesn't come out")
+    print(ctx.message.author, "used the naru command in the", ctx.message.channel, "channel")
+
+@bot.command(pass_context=True)
+async def mantis(ctx): #Mantis command
+    RNG = random.randint(1, 19)
+    if RNG == 1:
+        await bot.say(linecache.getline("../txt_files/mantis.txt", 1))
+    if RNG == 2:
+        await bot.say(linecache.getline("../txt_files/mantis.txt", 2))
+    if RNG == 3:
+        await bot.say(linecache.getline("../txt_files/mantis.txt", 3))
+    if RNG == 4:
+        await bot.say(linecache.getline("../txt_files/mantis.txt", 4))
+    if RNG == 5:
+        await bot.say(linecache.getline("../txt_files/mantis.txt", 5))
+    if RNG == 6:
+        await bot.say(linecache.getline("../txt_files/mantis.txt", 6))
+    if RNG == 7:
+        await bot.say(linecache.getline("../txt_files/mantis.txt", 7))
+    if RNG == 8:
+        await bot.say(linecache.getline("../txt_files/mantis.txt", 8))
+    if RNG == 9:
+        await bot.say(linecache.getline("../txt_files/mantis.txt", 9))
+    if RNG == 10:
+        await bot.say(linecache.getline("../txt_files/mantis.txt", 10))
+    if RNG == 11:
+        await bot.say(linecache.getline("../txt_files/mantis.txt", 11))
+    if RNG == 12:
+        await bot.say(linecache.getline("../txt_files/mantis.txt", 12))
+    if RNG == 13:
+        await bot.say(linecache.getline("../txt_files/mantis.txt", 13))
+    if RNG == 14:
+        await bot.say(linecache.getline("../txt_files/mantis.txt", 14))
+    if RNG == 15:
+        await bot.say(linecache.getline("../txt_files/mantis.txt", 15))
+    if RNG == 16:
+        await bot.say(linecache.getline("../txt_files/mantis.txt", 16))
+    if RNG == 17:
+        await bot.say(linecache.getline("../txt_files/mantis.txt", 17))
+    if RNG == 18:
+        await bot.say(linecache.getline("../txt_files/mantis.txt", 18))
+    if RNG == 19:
+        await bot.say(linecache.getline("../txt_files/mantis.txt", 19))
 
 @bot.command(pass_context=True)
 async def ban(ctx, member: discord.Member):
     if ctx.message.author.server_permissions.administrator:
         await bot.ban(member)
-        fmt = linecache.getline("../txt_files/general.txt", 8)
+        fmt = "{0.mention} is now banned!"
         await bot.send_message(ctx.message.channel, fmt.format(member))
         print(ctx.message.author, "banned", member)
     else:
-        await bot.say(linecache.getline("../txt_files/general.txt", 10))
+        await bot.say("You don't have permissions to use this command!")
         print(ctx.message.author, "tried to ban", member, "without permissions!")
 
 @bot.command(pass_context=True)
 async def kick(ctx, member: discord.Member):
     if ctx.message.author.server_permissions.administrator:
         await bot.kick(member)
-        fmt = linecache.getline("../txt_files/general.txt", 9)
+        fmt = "{0.mention} is now kicked"
         await bot.send_message(ctx.message.channel, fmt.format(member))
         print(ctx.message.author, "kicked", member)
     else:
-        await bot.say(linecache.getline("../txt_files/general.txt", 10))
+        await bot.say("You don't have permissions to use this command!")
         print(ctx.message.author, "tried to kick", member, "without permissions!")
 
 token_txt = open(r"../txt_files/bot_token.txt", "r")
