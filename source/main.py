@@ -7,6 +7,8 @@ from discord.ext import commands
 
 bot = commands.Bot(command_prefix=";;")
 
+bots = 3
+
 if not os.path.isfile("../txt_files/bot_token.txt"): #Authentication stuff
     print("Please insert your bot token")
     token = input()
@@ -97,7 +99,7 @@ async def mantis(ctx): #Mantis command
     print(ctx.message.author, "used the mantis command in the", ctx.message.channel, "channel")
 
 @bot.command(pass_context=True)
-async def ban(ctx, member: discord.Member):
+async def ban(ctx, member: discord.Member): #Ban command
     if ctx.message.author.server_permissions.administrator:
         await bot.ban(member)
         fmt = "{0.mention} is now banned!"
@@ -108,7 +110,7 @@ async def ban(ctx, member: discord.Member):
         print(ctx.message.author, "tried to ban", member, "without permissions!")
 
 @bot.command(pass_context=True)
-async def kick(ctx, member: discord.Member):
+async def kick(ctx, member: discord.Member): #Kick command
     if ctx.message.author.server_permissions.administrator:
         await bot.kick(member)
         fmt = "{0.mention} is now kicked"
@@ -117,6 +119,12 @@ async def kick(ctx, member: discord.Member):
     else:
         await bot.say("You don't have permissions to use this command!")
         print(ctx.message.author, "tried to kick", member, "without permissions!")
+
+@bot.command(pass_context=True)
+async def membercount(ctx): #Membercount command
+    totalmembers = ctx.message.server.member_count-bots
+    await bot.say(f"the {ctx.message.server} now has {totalmembers} members!")
+    print(ctx.message.author, "used the membercount command in the", ctx.message.channel, "channel")
 
 token_txt = open(r"../txt_files/bot_token.txt", "r")
 token = token_txt.read()
