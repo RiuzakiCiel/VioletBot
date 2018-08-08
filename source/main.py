@@ -99,6 +99,11 @@ async def mantis(ctx): #Mantis command
     print(ctx.message.author, "used the mantis command in the", ctx.message.channel, "channel")
 
 @bot.command(pass_context=True)
+async def necro(ctx): #Necro command
+    await bot.send_file(ctx.message.channel, "../imgs/necro.jpg")
+    print(ctx.message.author, "used the necro command in the", ctx.message.channel, "channel")
+
+@bot.command(pass_context=True)
 async def ban(ctx, member: discord.Member): #Ban command
     if ctx.message.author.server_permissions.administrator:
         await bot.ban(member)
