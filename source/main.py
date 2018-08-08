@@ -32,54 +32,63 @@ async def on_ready():
 
 @bot.command(pass_context=True) 
 async def r1(ctx): #R1 command
+    """Displays rule 1"""
     embed=discord.Embed(title="Rule 1", description=linecache.getline("../txt_files/rules.txt", 1))
     await bot.say(embed=embed)
     print(ctx.message.author, "used the r1 command in the", ctx.message.channel, "channel")
 
 @bot.command(pass_context=True)
 async def r2(ctx): #R2 command
+    """Displays rule 2"""
     embed=discord.Embed(title="Rule 2", description=linecache.getline("../txt_files/rules.txt", 2))
     await bot.say(embed=embed)
     print(ctx.message.author, "used the r2 command in the", ctx.message.channel, "channel")
 
 @bot.command(pass_context=True)
 async def r3(ctx): #R3 command
+    """Displays rule 3"""
     embed=discord.Embed(title="Rule 3", description=linecache.getline("../txt_files/rules.txt", 3))
     await bot.say(embed=embed)
     print(ctx.message.author, "used the r3 command in the", ctx.message.channel, "channel")
 
 @bot.command(pass_context=True)
 async def r4(ctx): #R4 command
+    """Displays rule 4"""
     embed=discord.Embed(title="Rule 4", description=linecache.getline("../txt_files/rules.txt", 4))
     await bot.say(embed=embed)
     print(ctx.message.author, "used the r4 command in the", ctx.message.channel, "channel")
 
 @bot.command(pass_context=True)
 async def r5(ctx): #R5 command
+    """Displays rule 5"""
     embed=discord.Embed(title="Rule 5", description=linecache.getline("../txt_files/rules.txt", 5))
     await bot.say(embed=embed)
     print(ctx.message.author, "used the r5 command in the", ctx.message.channel, "channel")
 
 @bot.command(pass_context=True)
 async def r6(ctx): #R6 command
+    """Displays rule 6"""
     embed=discord.Embed(title="Rule 6", description=linecache.getline("../txt_files/rules.txt", 6))
     await bot.say(embed=embed)
     print(ctx.message.author, "used the r6 command in the", ctx.message.channel, "channel")
 
 @bot.command(pass_context=True)
 async def r7(ctx): #R7 command
+    """Displays rule 7"""
     embed=discord.Embed(title="Rule 7", description=linecache.getline("../txt_files/rules.txt", 7))
     await bot.say(embed=embed)
     print(ctx.message.author, "used the r7 command in the", ctx.message.channel, "channel")
 
 @bot.command(pass_context=True)
 async def r8(ctx): #R8 command
+    """Displays rule 8"""
     embed=discord.Embed(title="Rule 8", description=linecache.getline("../txt_files/rules.txt", 8))
     await bot.say(embed=embed)
     print(ctx.message.author, "used the r8 command in the", ctx.message.channel, "channel")
 
 @bot.command(pass_context=True)
 async def naru(ctx): #Naru command
+    """Naru command (for science)"""
     RNG = random.randint(0, 2)
     if RNG == 0:
         await bot.say("Cus itsa  SMALL DICK BOY")
@@ -91,6 +100,7 @@ async def naru(ctx): #Naru command
 
 @bot.command(pass_context=True)
 async def gny(ctx): #Gny command
+    """Gny command (for science)"""
     RNG = random.randint(0, 2)
     if RNG == 0:
         await bot.say("Ya shaveing smooth and my crack hard to do")
@@ -102,17 +112,20 @@ async def gny(ctx): #Gny command
 
 @bot.command(pass_context=True)
 async def mantis(ctx): #Mantis command
+    """Mantis commmand (for actual science)"""
     RNG = random.randint(1, 19)
     await bot.say(linecache.getline("../txt_files/mantis.txt", RNG))
     print(ctx.message.author, "used the mantis command in the", ctx.message.channel, "channel")
 
 @bot.command(pass_context=True)
 async def necro(ctx): #Necro command
+    """Sends a picture of Necro"""
     await bot.send_file(ctx.message.channel, "../imgs/necro.jpg")
     print(ctx.message.author, "used the necro command in the", ctx.message.channel, "channel")
 
 @bot.command(pass_context=True)
 async def ban(ctx, member: discord.Member): #Ban command
+    """Ban a member"""
     if ctx.message.author.server_permissions.administrator:
         await bot.ban(member)
         fmt = "{0.mention} is now banned!"
@@ -124,6 +137,7 @@ async def ban(ctx, member: discord.Member): #Ban command
 
 @bot.command(pass_context=True)
 async def kick(ctx, member: discord.Member): #Kick command
+    """Kick a member"""
     if ctx.message.author.server_permissions.administrator:
         await bot.kick(member)
         fmt = "{0.mention} is now kicked"
@@ -135,6 +149,7 @@ async def kick(ctx, member: discord.Member): #Kick command
 
 @bot.command(pass_context=True)
 async def membercount(ctx): #Membercount command
+    """Displays the total amount of members"""
     totalmembers = ctx.message.server.member_count-bots
     await bot.say(f"the {ctx.message.server} now has {totalmembers} members!")
     print(ctx.message.author, "used the membercount command in the", ctx.message.channel, "channel")
