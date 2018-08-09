@@ -31,6 +31,7 @@ async def on_member_join(member): #Welcome message
 
 @bot.event #Startup message for host
 async def on_ready():
+    await bot.change_presence(game=discord.Game(name="with Yvar's sanity"))
     print('Logged in as')
     print(bot.user.name)
     print(bot.user.id)

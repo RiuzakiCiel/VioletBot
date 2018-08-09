@@ -108,3 +108,5 @@ venv.bak/
 .mypy_cache/
 source/.vscode/settings.json
 txt_files/bot_token.txt
+txt_files/users.json
+txt_files/users.json
