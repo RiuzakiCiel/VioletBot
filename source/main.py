@@ -3,6 +3,7 @@ import asyncio
 import os
 import random
 import linecache
+import json
 from discord.ext import commands
 
 bot = commands.Bot(command_prefix=";;")
@@ -22,6 +23,11 @@ async def on_member_join(member): #Welcome message
     fmt = 'Hey {0.mention}, welcome to the {1.name}!\nPlease read the rules and have fun!'
     await bot.send_message(discord.Object(id='458347412910768128'), fmt.format(member, server))
     print(member, "joined the the", server)
+    with open("../txt_files/users.json", "r") as f:
+        users = json.load(f)
+    await update_data(users, member)
+    with open("../txt_files/users.json", "w") as f:
+        json.dump(users, f)
 
 @bot.event #Startup message for host
 async def on_ready():
@@ -117,11 +123,11 @@ async def mantis(ctx): #Mantis command
     await bot.say(linecache.getline("../txt_files/mantis.txt", RNG))
     print(ctx.message.author, "used the mantis command in the", ctx.message.channel, "channel")
 
-@bot.command(pass_context=True)
-async def necro(ctx): #Necro command
-    """Sends a picture of Necro"""
-    await bot.send_file(ctx.message.channel, "../imgs/necro.jpg")
-    print(ctx.message.author, "used the necro command in the", ctx.message.channel, "channel")
+#@bot.command(pass_context=True)
+#async def necro(ctx): #Necro command
+#    """Sends a picture of Necro"""
+#    await bot.send_file(ctx.message.channel, "../imgs/necro.jpg")
+#    print(ctx.message.author, "used the necro command in the", ctx.message.channel, "channel")
 
 @bot.command(pass_context=True)
 async def ban(ctx, member: discord.Member): #Ban command
@@ -153,6 +159,40 @@ async def membercount(ctx): #Membercount command
     totalmembers = ctx.message.server.member_count-bots
     await bot.say(f"the {ctx.message.server} now has {totalmembers} members!")
     print(ctx.message.author, "used the membercount command in the", ctx.message.channel, "channel")
+
+@bot.event
+async def on_message(message):
+    with open("../txt_files/users.json", "r") as f:
+        users = json.load(f)
+    await update_data(users, message.author)
+    await add_experience(users, message.author, 5)
+    await level_up(users, message.author, message.channel)
+    with open("../txt_files/users.json", "w") as f:
+        json.dump(users, f)
+    await bot.process_commands(message)
+
+async def update_data(users, user):
+    if not user.id in users:
+        users[user.id] = {}
+        users[user.id]["experience"] = 0
+        users[user.id]["level"] = 1
+
+async def add_experience(users, user, exp):
+    users[user.id]["experience"] += exp
+
+async def level_up(users, user, channel):
+    experience = users[user.id]["experience"]
+    lvl_start = users[user.id]["level"]
+    lvl_end = int(experience ** (1/4))
+    if lvl_start < lvl_end:
+        await bot.send_message(channel, "{} has leveled up to level {}!".format(user.mention, lvl_end))
+        users[user.id]["level"] = lvl_end
+
+#@bot.command(pass_context=True)
+#async def rank(ctx, users, user):
+#    experience = users[user.id]["experience"]
+#    lvl_end = int(experience ** (1/4))
+#    await bot.say("{0.name}, you are level {} with {} xp!".format(user.mention, lvl_end, experience))
 
 token_txt = open(r"../txt_files/bot_token.txt", "r")
 token = token_txt.read()
