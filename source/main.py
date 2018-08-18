@@ -43,6 +43,7 @@ async def r1(ctx): #R1 command
     embed=discord.Embed(title="Rule 1", description=linecache.getline("../txt_files/rules.txt", 1))
     await bot.say(embed=embed)
     print(ctx.message.author, "used the r1 command in the", ctx.message.channel, "channel")
+    await bot.delete_message(ctx.message)
 
 @bot.command(pass_context=True)
 async def r2(ctx): #R2 command
@@ -50,6 +51,7 @@ async def r2(ctx): #R2 command
     embed=discord.Embed(title="Rule 2", description=linecache.getline("../txt_files/rules.txt", 2))
     await bot.say(embed=embed)
     print(ctx.message.author, "used the r2 command in the", ctx.message.channel, "channel")
+    await bot.delete_message(ctx.message)
 
 @bot.command(pass_context=True)
 async def r3(ctx): #R3 command
@@ -57,6 +59,7 @@ async def r3(ctx): #R3 command
     embed=discord.Embed(title="Rule 3", description=linecache.getline("../txt_files/rules.txt", 3))
     await bot.say(embed=embed)
     print(ctx.message.author, "used the r3 command in the", ctx.message.channel, "channel")
+    await bot.delete_message(ctx.message)
 
 @bot.command(pass_context=True)
 async def r4(ctx): #R4 command
@@ -64,6 +67,7 @@ async def r4(ctx): #R4 command
     embed=discord.Embed(title="Rule 4", description=linecache.getline("../txt_files/rules.txt", 4))
     await bot.say(embed=embed)
     print(ctx.message.author, "used the r4 command in the", ctx.message.channel, "channel")
+    await bot.delete_message(ctx.message)
 
 @bot.command(pass_context=True)
 async def r5(ctx): #R5 command
@@ -71,6 +75,7 @@ async def r5(ctx): #R5 command
     embed=discord.Embed(title="Rule 5", description=linecache.getline("../txt_files/rules.txt", 5))
     await bot.say(embed=embed)
     print(ctx.message.author, "used the r5 command in the", ctx.message.channel, "channel")
+    await bot.delete_message(ctx.message)
 
 @bot.command(pass_context=True)
 async def r6(ctx): #R6 command
@@ -78,6 +83,7 @@ async def r6(ctx): #R6 command
     embed=discord.Embed(title="Rule 6", description=linecache.getline("../txt_files/rules.txt", 6))
     await bot.say(embed=embed)
     print(ctx.message.author, "used the r6 command in the", ctx.message.channel, "channel")
+    await bot.delete_message(ctx.message)
 
 @bot.command(pass_context=True)
 async def r7(ctx): #R7 command
@@ -85,6 +91,7 @@ async def r7(ctx): #R7 command
     embed=discord.Embed(title="Rule 7", description=linecache.getline("../txt_files/rules.txt", 7))
     await bot.say(embed=embed)
     print(ctx.message.author, "used the r7 command in the", ctx.message.channel, "channel")
+    await bot.delete_message(ctx.message)
 
 @bot.command(pass_context=True)
 async def r8(ctx): #R8 command
@@ -92,6 +99,7 @@ async def r8(ctx): #R8 command
     embed=discord.Embed(title="Rule 8", description=linecache.getline("../txt_files/rules.txt", 8))
     await bot.say(embed=embed)
     print(ctx.message.author, "used the r8 command in the", ctx.message.channel, "channel")
+    await bot.delete_message(ctx.message)
 
 @bot.command(pass_context=True)
 async def naru(ctx): #Naru command
