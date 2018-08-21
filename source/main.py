@@ -172,11 +172,10 @@ async def membercount(ctx): #Membercount command
     print(ctx.message.author, "used the membercount command in the", ctx.message.channel, "channel")
 
 @bot.command(pass_context=True)
-async def poll(ctx):
+async def poll(ctx): #Poll command
     await bot.add_reaction(ctx.message, "👍")
     await bot.add_reaction(ctx.message, "👎")
     print(ctx.message.author, "used the poll command in the", ctx.message.channel, "channel")
-
 
 @bot.event
 async def on_message(message):
