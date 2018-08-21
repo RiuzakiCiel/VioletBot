@@ -134,12 +134,6 @@ async def mantis(ctx): #Mantis command
     await bot.say(linecache.getline("../txt_files/mantis.txt", RNG))
     print(ctx.message.author, "used the mantis command in the", ctx.message.channel, "channel")
 
-#@bot.command(pass_context=True)
-#async def necro(ctx): #Necro command
-#    """Sends a picture of Necro"""
-#    await bot.send_file(ctx.message.channel, "../imgs/necro.jpg")
-#    print(ctx.message.author, "used the necro command in the", ctx.message.channel, "channel")
-
 @bot.command(pass_context=True)
 async def ban(ctx, member: discord.Member): #Ban command
     """Ban a member"""
@@ -176,6 +170,25 @@ async def poll(ctx): #Poll command
     await bot.add_reaction(ctx.message, "👍")
     await bot.add_reaction(ctx.message, "👎")
     print(ctx.message.author, "used the poll command in the", ctx.message.channel, "channel")
+
+@bot.command(pass_context=True)
+@commands.has_permissions(manage_channels=True)
+async def takevent(ctx, user: discord.Member):
+    role = discord.utils.get(ctx.message.author.server.roles, name="no-vent")
+    await bot.add_roles(user, role)
+    await bot.say("{0.mention} cannot message in the vent channel anymore.".format(user))
+    print(ctx.message.author, "took vent acces from", user)
+
+
+@bot.command(pass_context=True)
+@commands.has_permissions(manage_channels=True)
+async def givevent(ctx, user: discord.Member):
+    role = discord.utils.get(ctx.message.author.server.roles, name="no-vent")
+    await bot.remove_roles(user, role)
+    await bot.say("{0.mention} can now message in the vent channel again.".format(user))
+    print(ctx.message.author, "gave vent acces back to", user)
+
+
 
 @bot.event
 async def on_message(message):
