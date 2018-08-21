@@ -135,28 +135,20 @@ async def mantis(ctx): #Mantis command
     print(ctx.message.author, "used the mantis command in the", ctx.message.channel, "channel")
 
 @bot.command(pass_context=True)
+@commands.has_permissions(ban_members=True)
 async def ban(ctx, member: discord.Member): #Ban command
     """Ban a member"""
-    if ctx.message.author.server_permissions.administrator:
-        await bot.ban(member)
-        fmt = "{0.mention} is now banned!"
-        await bot.send_message(ctx.message.channel, fmt.format(member))
-        print(ctx.message.author, "banned", member)
-    else:
-        await bot.say("You don't have permissions to use this command!")
-        print(ctx.message.author, "tried to ban", member, "without permissions!")
+    await bot.ban(member)
+    await bot.send_message(ctx.message.channel, "{0.mention} is now banned!".format(member))
+    print(ctx.message.author, "banned", member)
 
 @bot.command(pass_context=True)
+@commands.has_permissions(ban_members=True)
 async def kick(ctx, member: discord.Member): #Kick command
     """Kick a member"""
-    if ctx.message.author.server_permissions.administrator:
-        await bot.kick(member)
-        fmt = "{0.mention} is now kicked"
-        await bot.send_message(ctx.message.channel, fmt.format(member))
-        print(ctx.message.author, "kicked", member)
-    else:
-        await bot.say("You don't have permissions to use this command!")
-        print(ctx.message.author, "tried to kick", member, "without permissions!")
+    await bot.kick(member)
+    await bot.send_message(ctx.message.channel, "{0.mention} is now kicked!".format(member))
+    print(ctx.message.author, "kick", member)
 
 @bot.command(pass_context=True)
 async def membercount(ctx): #Membercount command
@@ -173,22 +165,19 @@ async def poll(ctx): #Poll command
 
 @bot.command(pass_context=True)
 @commands.has_permissions(manage_channels=True)
-async def takevent(ctx, user: discord.Member):
+async def takevent(ctx, user: discord.Member): #Takevent command
     role = discord.utils.get(ctx.message.author.server.roles, name="no-vent")
     await bot.add_roles(user, role)
     await bot.say("{0.mention} cannot message in the vent channel anymore.".format(user))
     print(ctx.message.author, "took vent acces from", user)
 
-
 @bot.command(pass_context=True)
 @commands.has_permissions(manage_channels=True)
-async def givevent(ctx, user: discord.Member):
+async def givevent(ctx, user: discord.Member): #Givevent command
     role = discord.utils.get(ctx.message.author.server.roles, name="no-vent")
     await bot.remove_roles(user, role)
     await bot.say("{0.mention} can now message in the vent channel again.".format(user))
     print(ctx.message.author, "gave vent acces back to", user)
-
-
 
 @bot.event
 async def on_message(message):
