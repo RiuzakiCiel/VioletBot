@@ -171,6 +171,13 @@ async def membercount(ctx): #Membercount command
     await bot.say(f"the {ctx.message.server} now has {totalmembers} members!")
     print(ctx.message.author, "used the membercount command in the", ctx.message.channel, "channel")
 
+@bot.command(pass_context=True)
+async def poll(ctx):
+    await bot.add_reaction(ctx.message, "👍")
+    await bot.add_reaction(ctx.message, "👎")
+    print(ctx.message.author, "used the poll command in the", ctx.message.channel, "channel")
+
+
 @bot.event
 async def on_message(message):
     with open("../txt_files/users.json", "r") as f:
