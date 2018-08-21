@@ -4,11 +4,13 @@ import os
 import random
 import linecache
 import json
+import youtube_dl
 from discord.ext import commands
 
 bot = commands.Bot(command_prefix=";;")
 
 bots = 3
+players = {}
 
 if not os.path.isfile("../txt_files/bot_token.txt"): #Authentication stuff
     print("Please insert your bot token")
@@ -197,11 +199,27 @@ async def level_up(users, user, channel):
         await bot.send_message(channel, "{} has leveled up to level {}!".format(user.mention, lvl_end))
         users[user.id]["level"] = lvl_end
 
-#@bot.command(pass_context=True)
-#async def rank(ctx, users, user):
-#    experience = users[user.id]["experience"]
-#    lvl_end = int(experience ** (1/4))
-#    await bot.say("{0.name}, you are level {} with {} xp!".format(user.mention, lvl_end, experience))
+@bot.command(pass_context=True)
+async def join(ctx):
+    channel = ctx.message.author.voice.voice_channel
+    await bot.join_voice_channel(channel)
+    print(ctx.message.author, "used the join command in the", ctx.message.channel, "channel")
+
+@bot.command(pass_context=True)
+async def leave(ctx):
+    server = ctx.message.server
+    voice_client = bot.voice_client_in(server)
+    await voice_client.disconnect()
+    print(ctx.message.author, "used the leave command in the", ctx.message.channel, "channel")
+
+@bot.command(pass_context=True)
+async def play(ctx, url):
+    server = ctx.message.server
+    voice_client = bot.voice_client_in(server)
+    player = await voice_client.create_ytdl_player(url)
+    players[server.id] = player
+    player.start()
+    print(ctx.message.author, "is now playing a song in", ctx.message.author.voice.voice_channel, "in the", ctx.message.server)
 
 token_txt = open(r"../txt_files/bot_token.txt", "r")
 token = token_txt.read()
