@@ -11,6 +11,7 @@ bot = commands.Bot(command_prefix=";;")
 
 bots = 2
 players = {}
+queues = {}
 
 if not os.path.isfile("../txt_files/bot_token.txt"): #Authentication stuff
     print("Please insert your bot token")
@@ -212,39 +213,60 @@ async def level_up(users, user, channel):
         await bot.send_message(channel, "{} has leveled up to level {}!".format(user.mention, lvl_end))
         users[user.id]["level"] = lvl_end
 
+def check_queue(id):
+    if queues[id] != []:
+        player = queues[id].pop(0)
+        players[id] = player
+        player.start()
+
 @bot.command(pass_context=True)
-async def join(ctx):
+async def join(ctx): #Join command
     channel = ctx.message.author.voice.voice_channel
     await bot.join_voice_channel(channel)
+    await bot.say("Joined the {} channel".format(channel))
     print(ctx.message.author, "used the join command in the", ctx.message.channel, "channel")
 
 @bot.command(pass_context=True)
-async def leave(ctx):
+async def leave(ctx): #Leave command
     server = ctx.message.server
+    channel = ctx.message.author.voice.voice_channel
     voice_client = bot.voice_client_in(server)
     await voice_client.disconnect()
+    await bot.say("left the {} channel".format(channel))
     print(ctx.message.author, "used the leave command in the", ctx.message.channel, "channel")
 
 @bot.command(pass_context=True)
-async def play(ctx, url):
+async def play(ctx, url): #Play command
     server = ctx.message.server
     voice_client = bot.voice_client_in(server)
-    player = await voice_client.create_ytdl_player(url)
+    player = await voice_client.create_ytdl_player(url, after=lambda: check_queue(server.id))
     players[server.id] = player
     player.start()
+    bot.say("Now playing the song.")
     print(ctx.message.author, "is now playing a song in", ctx.message.author.voice.voice_channel, "in the", ctx.message.server)
 
 @bot.command(pass_context=True)
-async def pause(ctx):
+async def pause(ctx): #Pause command
     id = ctx.message.server.id
-    players[id]
     players[id].pause()
+    await bot.say("Paused the music")
 
 @bot.command(pass_context=True)
-async def resume(ctx):
+async def resume(ctx): #Resume command
     id = ctx.message.server.id
-    players[id]
     players[id].resume()
+    await bot.say("Resumed the music")
+
+@bot.command(pass_context=True)
+async def queue(ctx, url): #Queue command
+    server = ctx.message.server
+    voice_client = bot.voice_client_in(server)
+    player = await voice_client.create_ytdl_player(url, after=lambda: check_queue(server.id))
+    if server.id in queues:
+        queues[server.id].append(player)
+    else:
+        queues[server.id] = [player]
+    await bot.say("Song queued.")
 
 token_txt = open(r"../txt_files/bot_token.txt", "r")
 token = token_txt.read()
