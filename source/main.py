@@ -9,7 +9,7 @@ from discord.ext import commands
 
 bot = commands.Bot(command_prefix=";;")
 
-bots = 3
+bots = 2
 players = {}
 
 if not os.path.isfile("../txt_files/bot_token.txt"): #Authentication stuff
@@ -128,6 +128,11 @@ async def gny(ctx): #Gny command
     print(ctx.message.author, "used the naru command in the", ctx.message.channel, "channel")
 
 @bot.command(pass_context=True)
+async def hug(ctx, user: discord.Member):
+    await bot.say("**hugs{0.mention}**".format(user))
+    await bot.send_file(ctx.message.channel, "../imgs/hug.gif")
+
+@bot.command(pass_context=True)
 async def mantis(ctx): #Mantis command
     """Mantis commmand (for actual science)"""
     RNG = random.randint(1, 19)
@@ -228,6 +233,18 @@ async def play(ctx, url):
     players[server.id] = player
     player.start()
     print(ctx.message.author, "is now playing a song in", ctx.message.author.voice.voice_channel, "in the", ctx.message.server)
+
+@bot.command(pass_context=True)
+async def pause(ctx):
+    id = ctx.message.server.id
+    players[id]
+    players[id].pause()
+
+@bot.command(pass_context=True)
+async def resume(ctx):
+    id = ctx.message.server.id
+    players[id]
+    players[id].resume()
 
 token_txt = open(r"../txt_files/bot_token.txt", "r")
 token = token_txt.read()
