@@ -191,6 +191,12 @@ async def nick(ctx, user: discord.Member, nick):
 
 @bot.command(pass_context=True)
 @commands.has_permissions(manage_nicknames=True)
+async def checkuser(ctx, user: discord.Member):
+    await bot.say("Username: {}\nUser ID: {}\nProfile picture: {}\nUser is a bot: {}\nDisplay name: {}\nDiscord account created at: {}".format(user.name, user.id, user.avatar_url, user.bot, user.display_name, user.created_at))
+    print("{} used the checkuser command on {}".format(ctx.message.author, user))
+
+@bot.command(pass_context=True)
+@commands.has_permissions(manage_nicknames=True)
 async def clearnick(ctx, user: discord.Member):
     await bot.change_nickname(user, "")
     await bot.say("cleared {}'s nickname!".format(user))
