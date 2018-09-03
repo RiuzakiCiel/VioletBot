@@ -12,6 +12,12 @@ bot = commands.Bot(command_prefix=";;")
 bots = 2
 players = {}
 queues = {}
+noxp_channels = {
+    "458350360193400832"
+    "458699265426849793"
+    "458699295382831134"
+}
+
 
 if not os.path.isfile("../txt_files/bot_token.txt"): #Authentication stuff
     print("Please insert your bot token")
@@ -170,6 +176,27 @@ async def poll(ctx): #Poll command
     print(ctx.message.author, "used the poll command in the", ctx.message.channel, "channel")
 
 @bot.command(pass_context=True)
+@commands.has_permissions(manage_messages=True)
+async def quote(ctx, msg): #Quote command
+    await bot.say(msg)
+    await bot.delete_message(ctx.message)
+    print(ctx.message.author, "used the quote command in the", ctx.message.channel, "channel")
+
+@bot.command(pass_context=True)
+@commands.has_permissions(manage_nicknames=True)
+async def nick(ctx, user: discord.Member, nick):
+    await bot.change_nickname(user, nick)
+    await bot.say("changed nickname to {}!".format(nick))
+    print("{} changed {}'s nickname to {}".format(ctx.message.author, user, nick))
+
+@bot.command(pass_context=True)
+@commands.has_permissions(manage_nicknames=True)
+async def clearnick(ctx, user: discord.Member):
+    await bot.change_nickname(user, "")
+    await bot.say("cleared {}'s nickname!".format(user))
+    print("{} cleared {}'s nickname".format(ctx.message.author, user))
+
+@bot.command(pass_context=True)
 @commands.has_permissions(manage_channels=True)
 async def takevent(ctx, user: discord.Member): #Takevent command
     role = discord.utils.get(ctx.message.author.server.roles, name="no-vent")
@@ -267,6 +294,11 @@ async def queue(ctx, url): #Queue command
     else:
         queues[server.id] = [player]
     await bot.say("Song queued.")
+    print(ctx.message.author, "is now playing a song in", ctx.message.author.voice.voice_channel, "in the", ctx.message.server)
+
+@bot.command(pass_context=True)
+async def skip(ctx):
+    print()
 
 token_txt = open(r"../txt_files/bot_token.txt", "r")
 token = token_txt.read()
